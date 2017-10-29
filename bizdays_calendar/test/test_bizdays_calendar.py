@@ -3,7 +3,7 @@ Tests for `bizdays_calendar` module.
 """
 import pytest
 from context import *
-from lib.exceptions import BizdaysException
+from utils.exceptions import BizdaysException
 
 
 def test_build_calendar_passing_invalid_calendar_file_should_print_log_message_and_pass():
