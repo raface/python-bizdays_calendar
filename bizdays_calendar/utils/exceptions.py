@@ -2,6 +2,10 @@ class BizdaysException(Exception):
     pass
 
 
+class FormattingException(Exception):
+    pass
+
+
 class FileException(Exception):
     pass
 
