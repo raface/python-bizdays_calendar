@@ -8,7 +8,7 @@ import re
 class Calendar(LoggingMixin):
     """
     Calendar class will create an object with a list of holidays and
-        it will allow to do some date calculation.
+        it will allow to do some date validation.
     :param holidays_file: The file path for holidays calendar file. The calendar file
         must contain strings with the following format YYYYMMDD or YYMMDD and using
         the following separators: - or / or . or _
