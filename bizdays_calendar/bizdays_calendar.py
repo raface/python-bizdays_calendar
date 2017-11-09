@@ -151,7 +151,7 @@ class Businessdays(Calendar):
             self.sourcedate = self.sourcedate + relativedelta(months=months)
             self.sourcedate = self.sourcedate + relativedelta(days=days)
         except (ValueError, TypeError) as e_info:
-            self.log.debug('The date calculation for {0} failed: {1}. Returned none.'.format(self.sourcedate, e_info))
+            raise FormattingException('The date calculation for {0} failed: {1}. Returned none.'.format(self.sourcedate, e_info))
         return self
 
     def get_date(self):
@@ -160,7 +160,7 @@ class Businessdays(Calendar):
         :return: sourcedate attribute as string
         """
         if isinstance(self.sourcedate, datetime.datetime):
-            return self.datetime_to_string(self.sourcedate, output_format=self.output_format)
+            self.sourcedate = self.datetime_to_string(self.sourcedate, output_format=self.output_format)
         return self.sourcedate
 
     def is_business_day(self):
@@ -202,7 +202,7 @@ class Businessdays(Calendar):
         :type days_to_move: int
         :return: sourcedate attribute as string
         """
-        if not days_to_move:
+        if days_to_move is None:
             raise BizdaysException("days_to_move argument cannot be None.")
         self.sourcedate = self.sourcedate + relativedelta(days=days_to_move)
         if not self.is_business_day() and days_to_move == 0:

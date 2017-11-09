@@ -34,6 +34,11 @@ def test_build_calendar_with_output_format_invalid_should_throw_exception():
         Calendar('./test.cal', output_format='YYYY-MM-DD')
 
 
+def test_build_calendar_passing_none_date_string_should_throw_exception():
+    with pytest.raises(FormattingException):
+        new_date_string = Calendar('./test.cal').date_input_format_validation(date_string=None)
+
+
 def test_build_calendar_get_holidays_should_return_datetime_list():
     holidays_list = Calendar('./test.cal').get_holidays()
     assert holidays_list == [datetime.datetime(2017, 12, 25, 0, 0), datetime.datetime(2018, 1, 1, 0, 0)]
@@ -79,6 +84,12 @@ def test_can_add_one_day():
     business_days = build_business_days('2000/02/29')
     calculated_date = calculate_date(business_days, days=1)
     assert calculated_date.get_date() == '2000/03/01'
+
+
+def test_calculated_date_passing_none_should_print_log_message():
+    with pytest.raises(FormattingException):
+        business_days = build_business_days('2000/02/29')
+        calculated_date = calculate_date(business_days, days=None)
 
 
 def test_get_next_business_day_adding_one_year_one_month_one_day():
